@@ -24,6 +24,7 @@ class MoviesController extends Controller
             ->json()['results'];
         $nowPlayingMovies = array_slice($nowPlayingResponse, 6, 14);
 
+        //get movies genre
         $genreArray = Http::get("http://api.themoviedb.org/3/genre/movie/list?api_key=4d173b8ea31d76212a176dfd93996c60")
         ->json()['genres'];
         $genres = collect($genreArray)->mapWithKeys(function ($genre){

@@ -37,7 +37,7 @@
     </style>
     {{-- ------------------------- Movie Info ------------------------- --}}
     <div class="movie-info border-b border-gray-800">
-        <div class="container mx-auto px-8 py-16 flex flex-col md:flex-row">
+        <div class="container mx-auto px-4 py-16 flex flex-col md:flex-row">
             <div class="flex-none">
                 <img src={{ 'https://image.tmdb.org/t/p/w500/' . $movie['poster_path'] }} alt="poster" class="w-72" />
             </div>
@@ -100,25 +100,30 @@
     {{-- ----------------------End movie info --------------------------- --}}
 
     {{-- ------------------------- Movie cast ------------------------- --}}
-    <div class="movie-cast px-8">
-        <h2 class="tracking-wider text-white text-3xl font-bold mt-8">Cast</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-7 gap-6 mb-10">
-            @foreach ( $credit['cast'] as $cast )
-                @if ($loop->index < 7)
-                    <div class="flex justify-center items-center">
-                        <div class="w-[9rem] h-[15rem] mt-6  rounded-lg ">
-                            <a href="">
-                                <div class="movie-card-img">
-                                    <img src="{{'https://image.tmdb.org/t/p/w500/' . $cast['profile_path']}}" alt="" />
+    <div class="movie-cast border-b border-gray-800">
+        <div class="container mx-auto px-4 py-4">
+            <h2 class="tracking-wider text-white text-3xl font-bold mt-8">Cast</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-7 gap-6 mb-10">
+                @foreach ( $credit['cast'] as $cast )
+                    @if ($loop->index < 7)
+                        <div class="flex justify-center items-center">
+                            <div class="w-[9rem] h-[15rem] mt-6  rounded-lg ">
+                                <a href=#">
+                                    <div class="movie-card-img">
+                                        @if ($cast['profile_path'])
+                                            <img src="{{'https://image.tmdb.org/t/p/w500/' . $cast['profile_path']}}" alt="" />
+                                        @else <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTj3O173KZ0i_nZWqkkzbjtsGcJQ_1y99MZZXPWxbzZPKaAD8uZ1TyTltM9Jm8lKBzKnz0&usqp=CAU" alt="">
+                                        @endif
+                                    </div>
+                                </a>
+                                <div class="mt-2">
+                                    <a href="" class="text-md mt-2 hover:text-gray:300 two-lines font-semibold" ">{{$cast['original_name']}}</a>
                                 </div>
-                            </a>
-                            <div class="mt-2">
-                                <a href="" class="text-md mt-2 hover:text-gray:300 two-lines font-semibold" ">{{$cast['original_name']}}</a>
                             </div>
                         </div>
-                    </div>
-                @endif
-            @endforeach
+                    @endif
+                @endforeach
+            </div>
         </div>
     </div>
 @endsection
