@@ -8,10 +8,16 @@
     <title>Document</title>
     {{-- boxincons --}}
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
     {{-- tailwind css --}}
     <script src="https://cdn.tailwindcss.com"></script>
+
+    {{-- alpinejs  --}}
+    <script defer src="https://unpkg.com/alpinejs@3.10.5/dist/cdn.min.js"></script>
+
     {{-- livewire css  --}}
     <livewire:styles />
+
     <style>
         .spinner {
             position: relative;

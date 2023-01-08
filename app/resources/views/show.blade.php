@@ -42,7 +42,7 @@
                 <img src={{ 'https://image.tmdb.org/t/p/w500/' . $movie['poster_path'] }} alt="poster" class="w-72" />
             </div>
             <div class="md:ml-24">
-                <h2 class="text-4xl mt-4 md:mt-0 font-semibold">{{$movie['title']}}</h2>
+                <h2 class="text-4xl mt-4 md:mt-0 font-semibold">{{ $movie['title'] }}</h2>
                 <div class="flex flex-wrap items-center text-gray-400 text-sm mt-2">
                     <svg class="fill-current text-orange-500 w-4" viewBox="0 0 24 24">
                         <g data-name="Layer 2">
@@ -57,24 +57,26 @@
                     <span class="mx-2">|</span>
                     <span>
                         @foreach ($movie['genres'] as $genre)
-                        {{ $genre['name'] }} @if (!$loop->last),
-                        @endif
-                    @endforeach
+                            {{ $genre['name'] }} @if (!$loop->last)
+                                ,
+                            @endif
+                        @endforeach
                     </span>
                 </div>
                 <p class="text-gray-300 mt-8">
-                    {{$movie['overview']}}
+                    {{ $movie['overview'] }}
                 </p>
 
                 <div class="mt-8">
                     <h4 class="text-white font-semibold">Featured Crew</h4>
                     <div class="flex mt-4">
-                        @foreach ( $credit['crew'] as $crew )
-                            @if ($loop->index < 3)
-                            <div class="mr-8">
-                                <div>{{$crew['name']}}</div>
-                                <div class="text-sm text-gray-400">{{$crew['job']}}</div>
-                            </div>
+                        @foreach ($credit['crew'] as $crew)
+                            @if ($loop->index < 4)
+                                <div class="mr-8">
+                                    <div>{{ $crew['name'] }}</div>
+                                    <div class="text-sm text-gray-400">{{ $crew['job'] }}</div>
+                                </div>
+                                @else @break
                             @endif
                         @endforeach
                     </div>
@@ -82,8 +84,9 @@
 
                 @if (count($video['results']) > 0)
                     <div class="mt-8">
-                        <a href="http://www.youtube.com/watch?v={{$video['results'][0]['key']}}"
-                            class="flex inline-flex items-center bg-orange-500 text-gray-900 rounded font-semibold px-4 py-3 hover:bg-orange-600 transition ease-in-out duration-150">
+                        <a href="http://www.youtube.com/watch?v={{ $video['results'][count($video['results']) - 1]['key'] }}"
+                            class="flex inline-flex items-center bg-orange-500 text-gray-900 rounded font-semibold px-4 py-3 hover:bg-orange-600 transition ease-in-out duration-150"
+                            target="_blank" >
                             <svg class="w-6 fill-current" viewBox="0 0 24 24">
                                 <path d="M0 0h24v24H0z" fill="none" />
                                 <path
@@ -93,7 +96,6 @@
                         </a>
                     </div>
                 @endif
-
             </div>
         </div>
     </div>
@@ -104,23 +106,27 @@
         <div class="container mx-auto px-4 py-4">
             <h2 class="tracking-wider text-white text-3xl font-bold mt-8">Cast</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-7 gap-6 mb-10">
-                @foreach ( $credit['cast'] as $cast )
+                @foreach ($credit['cast'] as $cast)
                     @if ($loop->index < 7)
                         <div class="flex justify-center items-center">
                             <div class="w-[9rem] h-[15rem] mt-6  rounded-lg ">
                                 <a href=#">
                                     <div class="movie-card-img">
                                         @if ($cast['profile_path'])
-                                            <img src="{{'https://image.tmdb.org/t/p/w500/' . $cast['profile_path']}}" alt="" />
-                                        @else <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTj3O173KZ0i_nZWqkkzbjtsGcJQ_1y99MZZXPWxbzZPKaAD8uZ1TyTltM9Jm8lKBzKnz0&usqp=CAU" alt="">
+                                            <img src="{{ 'https://image.tmdb.org/t/p/w500/' . $cast['profile_path'] }}"
+                                                alt="" />
+                                        @else
+                                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTj3O173KZ0i_nZWqkkzbjtsGcJQ_1y99MZZXPWxbzZPKaAD8uZ1TyTltM9Jm8lKBzKnz0&usqp=CAU"
+                                                alt="">
                                         @endif
                                     </div>
                                 </a>
                                 <div class="mt-2">
-                                    <a href="" class="text-md mt-2 hover:text-gray:300 two-lines font-semibold" ">{{$cast['original_name']}}</a>
+                                    <a href="" class="text-md mt-2 hover:text-gray:300 two-lines font-semibold" ">{{ $cast['original_name'] }}</a>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
+                        @else @break
                     @endif
                 @endforeach
             </div>

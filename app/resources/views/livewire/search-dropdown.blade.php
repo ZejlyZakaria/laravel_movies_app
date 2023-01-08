@@ -1,6 +1,19 @@
-<div class="relative md:mt-0 mt-3">
-    <input wire:model.debounce.500ms="search" type="text" class="bg-gray-800 rounded-full w-64 px-4 pl-8 py-2 text-sm "
-        placeholder="Search">
+<div class="relative md:mt-0 mt-3" x-data="{ isOpen: true }" @click.away="isOpen = false">
+    <input
+        wire:model.debounce.500ms="search"
+        type="text"
+        class="bg-gray-800 rounded-full w-64 px-4 pl-8 py-2 text-sm "
+        placeholder="Search"
+        @focus="isOpen = true"
+        @keydown="isOpen = true"
+        @keydown.escape.window="isOpen = false"
+        x-ref="search"
+        @keydown.window="
+            if (event.keyCode === 191) {
+                event.preventDefault();
+                $refs.search.focus();
+            }"
+    >
     <div class="absolute" style="top: 20%;">
         <i class='bx bx-search fill-current w-6 h-6 text-gray-500 ml-2'></i>
     </div>
@@ -14,16 +27,21 @@
     </div>
 
     @if (strlen($search) >= 2)
-        <div class="absolute bg-gray-800 rounded text-sm w-64 mt-4">
+        <div
+            class="absolute bg-gray-800 rounded text-sm w-64 mt-4"
+            x-show="isOpen"
+        >
             @if ($searchResults->count() > 0)
                 <ul>
                     @foreach ($searchResults as $result)
                         <li class="border-b border-gray-700">
-                            <a href="{{ route('movies.show', $result['id']) }}"
-                                class="block hover:bg-gray-700 px-3 py-3 flex items-center">
+                            <a
+                                href="{{ route('movies.show', $result['id']) }}"
+                                class="block hover:bg-gray-700 px-3 py-3 flex items-center transition ease-in-out duration-150"
+                                @if ($loop->last) @keydown.tab="isOpen = false" @endif
+                            >
                                 @if ($result['poster_path'])
-                                    <img src="https://image.tmdb.org/t/p/w92/{{ $result['poster_path'] }}" alt="poster"
-                                    class="w-10">
+                                    <img src="https://image.tmdb.org/t/p/w92/{{ $result['poster_path'] }}" alt="poster" class="w-8">
                                 @else <img src="https://us.123rf.com/450wm/adamlapunik/adamlapunik2201/adamlapunik220100376/adamlapunik220100376.jpg?ver=6" class="w-10" alt="">
                                 @endif
                                 <span class="ml-4">{{ $result['title'] }}</span>
