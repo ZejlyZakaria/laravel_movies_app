@@ -1,0 +1,5 @@
+composer require livewire/livewire
+composer require spatie/laravel-view-models
+
+
+to add a new view model : php artisan make:view-model MoviesViewModel
