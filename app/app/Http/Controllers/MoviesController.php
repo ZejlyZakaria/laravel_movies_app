@@ -34,7 +34,7 @@ class MoviesController extends Controller
 
         $viewModel = new MoviesViewModel($popularMovies, $nowPlayingMovies, $genres);
 
-        return view('index', $viewModel);
+        return view('movies.index', $viewModel);
 
 
         // dump($nowPlayingMovies);
@@ -87,7 +87,7 @@ class MoviesController extends Controller
         $video = Http::get("http://api.themoviedb.org/3/movie/{$id}/videos?api_key=4d173b8ea31d76212a176dfd93996c60")
             ->json();
 
-        return view('show',[
+        return view('movies.show',[
             "movie" => $movie,
             "credit" => $credit,
             "video" => $video,

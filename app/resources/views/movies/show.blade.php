@@ -58,7 +58,6 @@
                     <span>
                         @foreach ($movie['genres'] as $genre)
                             {{ $genre['name'] }} @if (!$loop->last)
-                                ,
                             @endif
                         @endforeach
                     </span>
@@ -123,9 +122,9 @@
                                 </a>
                                 <div class="mt-2">
                                     <a href="" class="text-md mt-2 hover:text-gray:300 two-lines font-semibold" ">{{ $cast['original_name'] }}</a>
-                                        </div>
-                                    </div>
                                 </div>
+                            </div>
+                        </div>
                         @else @break
                     @endif
                 @endforeach

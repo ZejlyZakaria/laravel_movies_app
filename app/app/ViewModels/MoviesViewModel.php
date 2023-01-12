@@ -26,13 +26,12 @@ class MoviesViewModel extends ViewModel
             return collect($movie)->merge([
                 'poster_path' => 'https://image.tmdb.org/t/p/w500/' . $movie['poster_path'],
                 'vote_average' => $movie['vote_average'] * 10 . '%',
-                'release_date' => Carbon::parse($movie['release_date'])->format('Y'),
                 'genres' => $genresFormatted,
             ])->only([
                 'poster_path', 'id', 'genres', 'title', 'vote_average', 'overview', 'release_date', 'credits' ,
                 'videos', 'crew', 'cast',
             ]);
-        })->dump();
+        });
     }
 
     public function popularMovies(){

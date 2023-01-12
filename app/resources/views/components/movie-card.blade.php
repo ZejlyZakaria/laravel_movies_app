@@ -11,8 +11,6 @@
                     <span><i class='bx bxs-star text-orange-500'></i></span>
                     <div class="one-line">
                         <span class="ml-1">{{ $movie['vote_average'] }}</span>
-                        <span class="mx-2">|</span>
-                        <span>{{ $movie['release_date']}}</span>
                     </div>
                 </div>
                 <div class="text-gray-400 text-xs one-line font-weight-600 mt-1" style="font-weight: 600">
