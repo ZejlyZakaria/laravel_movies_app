@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use App\ViewModels\ActorsViewModel;
+use App\ViewModels\ActorViewModel;
 
 
 class ActorsController extends Controller
@@ -52,7 +53,21 @@ class ActorsController extends Controller
      */
     public function show($id)
     {
-        //
+        $actor = Http::get("http://api.themoviedb.org/3/person/".$id."?api_key=4d173b8ea31d76212a176dfd93996c60")
+            ->json();
+
+        $social = Http::get("http://api.themoviedb.org/3/person/".$id."/external_ids?api_key=4d173b8ea31d76212a176dfd93996c60")
+            ->json();
+
+        $knownFor = Http::get("http://api.themoviedb.org/3/person/".$id."/external_ids?api_key=4d173b8ea31d76212a176dfd93996c60")
+            ->json();
+
+        $credits = Http::get("http://api.themoviedb.org/3/person/".$id."/combined_credits?api_key=4d173b8ea31d76212a176dfd93996c60")
+            ->json();
+
+        $viewModel = new ActorViewModel($actor, $social, $credits);
+
+        return view('actors.show',$viewModel);
     }
 
     /**

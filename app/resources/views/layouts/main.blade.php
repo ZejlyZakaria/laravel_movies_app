@@ -88,6 +88,7 @@
     </nav>
     @yield('content')
     <livewire:scripts />
+    @yield('scripts') {{-- i am using it in actor index  --}}
 </body>
 
 </html>

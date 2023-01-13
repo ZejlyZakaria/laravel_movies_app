@@ -7,8 +7,10 @@
             height: 90%;
         }
 
-        .movie-card-img img {
+        img{
             border-radius: 8px;
+        }
+        .movie-card-img img {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -67,7 +69,7 @@
                 </p>
 
                 <div class="mt-8">
-                    <h4 class="text-white font-semibold">Featured Crew</h4>
+                    <h4 class="text-white font-semibold text-xl">Featured Crew</h4>
                     <div class="flex mt-4">
                         @foreach ($credit['crew'] as $crew)
                             @if ($loop->index < 4)
@@ -108,8 +110,8 @@
                 @foreach ($credit['cast'] as $cast)
                     @if ($loop->index < 7)
                         <div class="flex justify-center items-center">
-                            <div class="w-[9rem] h-[15rem] mt-6  rounded-lg ">
-                                <a href=#">
+                            <div class="w-[10rem] h-[16rem] mt-6  rounded-lg ">
+                                <a href={{ route('actors.show', $cast['id']) }}">
                                     <div class="movie-card-img">
                                         @if ($cast['profile_path'])
                                             <img src="{{ 'https://image.tmdb.org/t/p/w500/' . $cast['profile_path'] }}"
@@ -121,7 +123,7 @@
                                     </div>
                                 </a>
                                 <div class="mt-2">
-                                    <a href="" class="text-md mt-2 hover:text-gray:300 two-lines font-semibold" ">{{ $cast['original_name'] }}</a>
+                                    <a href="{{ route('actors.show', $cast['id']) }}" class="text-md mt-2 hover:text-gray:300 two-lines font-semibold" ">{{ $cast['original_name'] }}</a>
                                 </div>
                             </div>
                         </div>

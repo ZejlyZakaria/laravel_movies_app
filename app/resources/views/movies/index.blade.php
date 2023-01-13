@@ -28,7 +28,7 @@
             -webkit-box-orient: vertical;
         }
     </style>
-    <div class="popular-movies mx-auto pt-8 py-4">
+    <div class="popular-movies container mx-auto px-4 pt-8">
         {{-- ------------------------------- Popular Movies ------------------------------- --}}
         <div class="popular-movies">
             <h2 class="uppercase tracking-wider text-orange-500 text-lg font-bold">Popular Movies</h2>

@@ -10,9 +10,10 @@
 
         .actor-card-img {
             width: 90%;
+            margin-left: 5%;
             min-width: 9rem;
             height: 70%;
-            min-height: 13.5rem;
+            min-height: 14.5rem;
             max-height: 270px;
         }
 
@@ -27,6 +28,7 @@
 
         .actor-info {
             width: 90%;
+            margin-left: 5%;
             min-width: 9rem;
         }
 
@@ -39,7 +41,7 @@
     </style>
 
 
-    <div class="popular-actors mx-auto pt-8 py-2">
+    <div class="popular-actors container mx-auto px-4 pt-8">
         <h2 class="uppercase tracking-wider text-orange-500 text-lg font-bold">Popular Actors</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-7 gap-6 mb-10">
             @foreach ($popularActors as $actor)
@@ -47,13 +49,19 @@
                     <div class="actor-card">
                         <div class="actor-card-img">
                             @if (strlen($actor['profile_path']) > 35)
-                                <img src="{{ $actor['profile_path'] }}" alt="" />
+                                <a href="{{ route('actors.show', $actor['id']) }}">
+                                    <img src="{{ $actor['profile_path'] }}" alt="" />
+                                </a>
                             @else
                                 <img src='https://ui-avatars.com/api/?name={{ $actor['name'] }}' alt="">
                             @endif
                         </div>
                         <div class="actor-info mt-2">
-                            <div class="text-md font-semibold">{{ $actor['name'] }}</div>
+                            <div class="text-md font-semibold">
+                                <a href="{{ route('actors.show', $actor['id']) }}">
+                                    {{ $actor['name'] }}
+                                </a>
+                            </div>
                             <div class="text-gray-400 text-sm one-line font-weight-600 mt-1 one-line">
                                 {{ $actor['known_for'] }}</div>
                         </div>
@@ -61,9 +69,9 @@
                 </div>
             @endforeach
         </div>
-    </div>
+    </div> <!-- end popular-actors -->
 
-    <div class="flex justify-between mb-6">
+    {{-- <div class="flex justify-between container mx-auto px-4 pb-8">
         @if ($previous)
             <a href="/actors/page/{{ $previous }}">
                 <div class="pt-1 pb-1 pr-3 pl-3 flex justify-center border-solid border-2 border-orange-500"
@@ -84,6 +92,18 @@
         @else
             <div></div>
         @endif
-    </div>
-    </div>
+    </div> --}}
+</div>
+@endsection
+
+@section('scripts')
+<script src="https://unpkg.com/infinite-scroll@3/dist/infinite-scroll.pkgd.min.js"></script>
+<script>
+    var elem = document.querySelector('.grid');
+    var infScroll = new InfiniteScroll( elem, {
+      path: '/actors/page/@{{#}}',
+      append: '.actor-card-container',
+      // history: false,
+    });
+</script>
 @endsection
