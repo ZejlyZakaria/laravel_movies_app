@@ -57,7 +57,7 @@ class ActorViewModel extends ViewModel
                     'poster_path' => $movie['poster_path']
                         ? 'https://image.tmdb.org/t/p/w185'.$movie['poster_path']
                         : 'https://via.placeholder.com/185x278',
-                    'title' => isset($movie['title']) ? $movie['title'] : 'untitled',
+                    'title' => $title,
                     'linkToPage' => $movie['media_type'] === 'movie'
                 ])->only([
                     'poster_path', 'title', 'id', 'media_type', 'linkToPage',

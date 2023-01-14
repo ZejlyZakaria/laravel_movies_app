@@ -53,9 +53,9 @@
                 </p>
 
                 <h4 class="font-semibold mt-12 text-xl mb-6">Known For</h4>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
                     @foreach ($knownForMovies as $movie)
-                    <div class="p-4">
+                    <div class="p-3">
                         <a href="{{ route('movies.show' ,$movie['id']) }}">
                             <img src="{{ $movie['poster_path'] }}" alt="poster" class="hover:opacity-75 transition ease-in-out duration-150"></a>
                         <a href="{{ route('movies.show' ,$movie['id']) }}" class="text-md leading-normal block text-white hover:text-gray-400 mt-1">{{ $movie['title'] }}</a>
